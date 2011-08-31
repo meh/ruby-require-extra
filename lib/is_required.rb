@@ -12,7 +12,7 @@
 
 module Kernel
   def required? (name)
-    regexp = /\/#{Regexp.escape(name)}\.(?i)(so|rb)$/
+    regexp = /(\A|\/)#{Regexp.escape(name)}(\.([sS][oO]|[rR][bB]))?$/
 
     $".any? {|file|
       file =~ regexp
