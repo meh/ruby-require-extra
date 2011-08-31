@@ -11,10 +11,10 @@
 #++
 
 module Kernel
-  def required? (name)
+  def required? (name, from=$")
     regexp = /(\A|\/)#{Regexp.escape(name)}(\.([sS][oO]|[rR][bB]))?$/
 
-    $".any? {|file|
+    from.any? {|file|
       file =~ regexp
     }
   end
