@@ -11,13 +11,21 @@
 #++
 
 module Kernel
-  def required? (name, from=$")
-    regexp = /(\A|\/)#{Regexp.escape(name)}(\.([sS][oO]|[rR][bB]))?$/
+	def required? (name, from=$")
+		regexp = /(\A|\/)#{Regexp.escape(name)}(\.[^.]+)?$/
 
-    from.any? {|file|
-      file =~ regexp
-    }
-  end
+		from.any? {|file|
+			file =~ regexp
+		}
+	end
 
-  alias is_required? required?
+	alias is_required? required?
+
+	def require! (what)
+		begin
+			require what; true
+		rescue Exception
+			false
+		end
+	end
 end

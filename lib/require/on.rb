@@ -10,7 +10,7 @@
 #  0. You just DO WHAT THE FUCK YOU WANT TO.
 #++
 
-require 'is_required'
+require 'require/extra'
 require 'refining'
 
 module Kernel
@@ -24,7 +24,7 @@ module Kernel
     else
       RequireWatch[name] << block
     end
-  end
+  end; alias on_required on_require
 
   refine_method :require do |old, path|
     old.call(path).tap {
