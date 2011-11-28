@@ -26,8 +26,8 @@ module Kernel
     end
   end; alias on_required on_require
 
-  refine_method :require do |old, path|
-    old.call(path).tap {
+  refine_method :require, :prefix => '__extra' do |path|
+    __extra_require(path).tap {
       RequireWatch.any? {|name, blocks|
         if required?(name, [path])
           blocks.each {|block|
